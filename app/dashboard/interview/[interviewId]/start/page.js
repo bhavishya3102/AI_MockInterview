@@ -45,7 +45,7 @@ setloading(false)
 
 
   return (
-    <div className="flex flex-row gap-2" >
+    <div className="flex flex-col md:flex-row gap-2 items-center justify-center" >
 
       <QuestionInterview interviewques={interviewques} mockresp={mockresp} activeques={activeques}/>
       <RecordAnswer interviewques={interviewques} mockresp={mockresp} activeques={activeques} setacitveques={setactiveques}/>

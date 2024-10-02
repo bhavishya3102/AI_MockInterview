@@ -89,7 +89,7 @@ const Page = ({ params }) => {
         )}
       </div>
       </div>
-      <div className="flex justify-end items-end">
+      <div className="flex justify-end items-end my-4">
     
         <Link href={"/dashboard/interview/" + params.interviewId + "/start"}>
           <Button>Start Interview</Button>

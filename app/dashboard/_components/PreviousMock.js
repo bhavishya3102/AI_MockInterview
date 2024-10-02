@@ -11,15 +11,19 @@ import {
   } from "@/components/ui/card"
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
+import { useUser } from '@clerk/nextjs'
   
 
 const PreviousMock = () => {
 
 const [prevMock,setprevMock]=useState([]);
 const router=useRouter();
+const {user}=useUser()
+
+const email=user?.primaryEmailAddress?.emailAddress;
     useEffect(() => {
     const fetchdata=async ()=>{
-        const resp=await Previous_Mock();
+        const resp=await Previous_Mock(email);
         console.log(resp.data)
         setprevMock(resp.data)
 

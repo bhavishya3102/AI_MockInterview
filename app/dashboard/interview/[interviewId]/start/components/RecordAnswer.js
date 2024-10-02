@@ -7,8 +7,11 @@ import recordUserAnswer from './actions';
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useToast } from "@/hooks/use-toast"
 
 const RecordAnswer = ({interviewques,mockresp,activeques,setacitveques}) => {
+  
+
   console.log(mockresp)
     const {
         error,
@@ -25,6 +28,7 @@ const RecordAnswer = ({interviewques,mockresp,activeques,setacitveques}) => {
     const [voice,setvoice]=useState("");
     const {user}=useUser();
     const email=user?.primaryEmailAddress?.emailAddress;
+    const { toast } = useToast()
 
 
    // This effect listens for changes in results and updates the voice state
@@ -38,11 +42,12 @@ const RecordAnswer = ({interviewques,mockresp,activeques,setacitveques}) => {
   // This effect triggers when recording stops, and the voice length exceeds 10 characters
   useEffect(() => {
     if (!isRecording && voice?.length > 10) {
+      console.log("mark1")
       updateUser(); // Ensure that the updateUser function is defined and working
     }
-  }, [isRecording, voice]);
+  }, [isRecording,voice]);
 
- if(!isRecording){
+ if(!isRecording && voice?.length > 10){
     console.log(voice)
  }
 
@@ -61,6 +66,10 @@ const updateUser = async () => {
         
         const useranswer=await recordUserAnswer(interviewques,activeques,voice,mockresp,email);
         console.log(useranswer.data)
+        toast({
+          title: "Record successfully"
+         
+        })
 
     }catch(error){
         console.error(error);
@@ -106,7 +115,7 @@ const updateUser = async () => {
      <div className="flex flex-row gap-2 mt-6">
      {activeques!=0 && <Button onClick={()=>setacitveques(activeques-1)}>Prev</Button> }
      {activeques!=4 && <Button onClick={()=>setacitveques(activeques+1)}>Next</Button> }
-          <Link href={`/dashboard/interview/${mockresp.mockId}/feedback`}>
+          <Link href={`/dashboard/interview/${mockresp?.mockId}/feedback`}>
           {activeques==4 && <Button>End Interview</Button>}
           </Link>
      </div>

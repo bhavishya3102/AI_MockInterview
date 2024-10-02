@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Page = ({ params }) => {
   const [data, setData] = useState(null); // Initialize with null or an appropriate default value
-  const [loading, setLoading] = useState(true); // Track loading state
+
   const [webcam, setwebcam] = useState();
 
   useEffect(() => {
@@ -21,17 +21,13 @@ const Page = ({ params }) => {
       } catch (error) {
         console.error("Error fetching interview permission:", error);
         // Handle error if necessary
-      } finally {
-        setLoading(false); // Set loading to false regardless of success or failure
-      }
+      } 
     };
 
     fetchData(); // Call the async function
   }, [params.interviewId]); // Add params.interviewId as a dependency
 
-  if (loading) {
-    return <div className="flex relative top-50 le">Loading...</div>; // Show loading state
-  }
+
 
   return (
     <div>
@@ -41,15 +37,15 @@ const Page = ({ params }) => {
           <div className="flex flex-col p-5 rounded-lg border gap-5">
             <h2 className="text-lg">
               <strong>Job Role/Job Position:</strong>
-              {data.jobPosition}{" "}
+              {data?.jobPosition}{" "}
             </h2>
             <h2 className="text-lg">
               <strong>Job Description/Tech Stack:</strong>
-              {data.jobDesc}{" "}
+              {data?.jobDesc}{" "}
             </h2>
             <h2 className="text-lg">
               <strong>Years of Experience:</strong>
-              {data.jobExperience}{" "}
+              {data?.jobExperience}{" "}
             </h2>
           </div>
           <div className="p-5 border rounded-lg border-yellow-300 bg-yellow-100">

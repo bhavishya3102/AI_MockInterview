@@ -38,11 +38,11 @@ export async function handleInterviewSubmission({ jobposition, jobdesc, experien
 }
 
 
-export async function Previous_Mock(){
+export async function Previous_Mock(email){
   try{
 await connectDb();
 
-const result=await mockInterviewSchema.find({});
+const result=await mockInterviewSchema.find({createdBy:email});
 console.log(result);
 return {data:result}
   }catch(error){

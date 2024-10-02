@@ -39,6 +39,7 @@ export async function handleInterviewSubmission({ jobposition, jobdesc, experien
 
 
 export async function Previous_Mock(email){
+  console.log(email)
   try{
 await connectDb();
 

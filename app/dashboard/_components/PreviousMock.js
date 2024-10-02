@@ -21,15 +21,18 @@ const router=useRouter();
 const {user}=useUser()
 
 const email=user?.primaryEmailAddress?.emailAddress;
-    useEffect(() => {
+console.log(email)
+
+useEffect(() => {
     const fetchdata=async ()=>{
         const resp=await Previous_Mock(email);
-        console.log(resp.data)
-        setprevMock(resp.data)
+        console.log(resp?.data)
+        setprevMock(resp?.data)
 
     }
     fetchdata();
-    }, [])
+    }, [email])
+    
   return (
     <div>
       <h2 className="text-2xl text-blue-900 font-bold">Previous Mock Interview</h2>

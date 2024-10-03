@@ -27,6 +27,7 @@ const RecordAnswer = ({interviewques,mockresp,activeques,setacitveques}) => {
       results,
       startSpeechToText,
       stopSpeechToText,
+      setResults
     } = useSpeechToText({
       continuous: true,
       useLegacyResults: false
@@ -72,11 +73,17 @@ const updateUser = async () => {
       setloading(true);
         const useranswer=await recordUserAnswer(interviewques,activeques,voice,mockresp,email);
         console.log(useranswer.data)
-        toast({
-          title: "Record successfully"
-         
-        })
-        setloading(false)
+        
+        if (useranswer?.data) {
+          toast({
+            title: "Record successfully"
+           
+          })
+          setvoice("");
+          setResults([]);
+          setloading(false);
+        }
+       
 
     }catch(error){
         console.error(error);

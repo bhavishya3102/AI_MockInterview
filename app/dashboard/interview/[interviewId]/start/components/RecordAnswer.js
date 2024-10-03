@@ -119,8 +119,13 @@ const updateUser = async () => {
           {activeques==4 && <Button>End Interview</Button>}
           </Link>
      </div>
+     <ul>
+  {results.map((result, index) => (
+    <li key={index}>{result.transcript}</li>
+  ))}
+</ul>
     </div>
-
+ 
         
     </div>
   )

@@ -29,7 +29,7 @@ const RecordAnswer = ({interviewques,mockresp,activeques,setacitveques}) => {
       stopSpeechToText,
       setResults
     } = useSpeechToText({
-      continuous: true,
+      continuous: false,
       useLegacyResults: false
     });
 

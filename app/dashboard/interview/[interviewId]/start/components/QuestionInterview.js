@@ -18,20 +18,25 @@ const speechtotext=(text)=>{
 }
 
   return (
-    interviewques && ( <div className="p-5 border rounded-lg my-10 w-[50vw]">
-      {
+    interviewques && ( <div className="p-5 border rounded-lg my-10  w-[80vw] md:w-[50vw]">
+     
+     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 ">
+
+     {
           interviewques.map((item,ind)=>{
             return (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 ">
+            
                     <div className={` p-2 border rounded-full text-xs md:text-sm text-center cursor-pointer ${activeques==ind && "bg-blue-950 text-white"}`}>
                    
                    #question {ind+1}
                    </div>
-                </div>
+             
 
             )
         })
       }
+     </div>
+    
       <div>{interviewques[activeques].question}</div>
       <Volume2 onClick={()=>speechtotext(interviewques[activeques].question)}></Volume2>
       <div className="border rounded-lg p-5 bg-blue-100 mt-20 ">

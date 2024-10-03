@@ -91,7 +91,7 @@ const updateUser = async () => {
 }
 
   return (
-    <div className="w-[50vw] flex  flex-col items-center justify-center">
+    <div className=" w-[80vw] md:w-[50vw] flex  flex-col items-center justify-center">
           <div className="flex flex-col mt-10 justify-center items-center bg-black rounded-lg p-5">
           <Image
           src={"/image.png"}
@@ -127,7 +127,7 @@ const updateUser = async () => {
         )}
       </button>
      
-     <div className="flex flex-row gap-2 mt-6">
+     <div className="flex flex-row gap-2 mt-6 ">
      {activeques!=0 && <Button onClick={()=>setacitveques(activeques-1)}>Prev</Button> }
      {activeques!=4 && <Button onClick={()=>setacitveques(activeques+1)}>Next</Button> }
           <Link href={`/dashboard/interview/${mockresp?.mockId}/feedback`}>

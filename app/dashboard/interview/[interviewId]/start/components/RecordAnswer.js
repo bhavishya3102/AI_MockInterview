@@ -13,30 +13,30 @@ const RecordAnswer = ({interviewques,mockresp,activeques,setacitveques}) => {
   
 
   console.log(mockresp)
-    const {
-        error,
-        interimResult,
-        isRecording,
-        results,
-        startSpeechToText,
-        stopSpeechToText,
-      } = useSpeechToText({
-        continuous: true,
-        useLegacyResults: false
-      });
+  
     const [webcam,setwebcam]=useState(true);
     const [voice,setvoice]=useState("");
     const {user}=useUser();
     const email=user?.primaryEmailAddress?.emailAddress;
     const { toast } = useToast()
+    const {
+      error,
+      interimResult,
+      isRecording,
+      results,
+      startSpeechToText,
+      stopSpeechToText,
+    } = useSpeechToText({
+      continuous: true,
+      useLegacyResults: false
+    });
 
 
    // This effect listens for changes in results and updates the voice state
    useEffect(() => {
-    if (results) {
-      const updatedVoice = results.map((result) => result?.transcript).join(" ");
-      setvoice(updatedVoice); // You may want to append or replace based on your needs
-    }
+    results?.map((result) =>
+      setvoice((prevAns) => prevAns + result?.transcript)
+    );
   }, [results]);
 
   // This effect triggers when recording stops, and the voice length exceeds 10 characters
@@ -90,6 +90,7 @@ const updateUser = async () => {
           style={{
             height: 400,
             width: 400,
+            zindex:10
            
           }}
         />
@@ -119,11 +120,7 @@ const updateUser = async () => {
           {activeques==4 && <Button>End Interview</Button>}
           </Link>
      </div>
-     <ul>
-  {results.map((result, index) => (
-    <li key={index}>{result.transcript}</li>
-  ))}
-</ul>
+    
     </div>
  
         

@@ -14,6 +14,7 @@ const recordUserAnswer = async (interviewques,activeques,voice,mockresp,email) =
 
 try{
 await connectDb();
+
 const prompt="Question:"+interviewques[activeques].question+",userAnswer:"+voice+
 ",Depends on question and user answer for give interview question, please give us rating for answer and feedback as area of improvmenet if any in just 3 to 5 lines to improve it in JSON format with rating field and feedback field. Dont give me ANY extra info. Just give me json format";
 

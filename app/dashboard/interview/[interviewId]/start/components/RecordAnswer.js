@@ -17,6 +17,7 @@ const RecordAnswer = ({interviewques,mockresp,activeques,setacitveques}) => {
     const [webcam,setwebcam]=useState(true);
     const [voice,setvoice]=useState("");
     const {user}=useUser();
+    const [loading,setloading]=useState(false)
     const email=user?.primaryEmailAddress?.emailAddress;
     const { toast } = useToast()
     const {
@@ -51,6 +52,11 @@ const RecordAnswer = ({interviewques,mockresp,activeques,setacitveques}) => {
     console.log(voice)
  }
 
+ useEffect(() => {
+  console.log("error", error);
+}, [error]);
+
+
 const setRecording= () => {
     if (isRecording) {
       stopSpeechToText();
@@ -63,13 +69,14 @@ const setRecording= () => {
 
 const updateUser = async () => {
     try{
-        
+      setloading(true);
         const useranswer=await recordUserAnswer(interviewques,activeques,voice,mockresp,email);
         console.log(useranswer.data)
         toast({
           title: "Record successfully"
          
         })
+        setloading(false)
 
     }catch(error){
         console.error(error);

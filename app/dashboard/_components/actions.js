@@ -27,7 +27,8 @@ export async function handleInterviewSubmission({ jobposition, jobdesc, experien
         jobDesc: jobdesc,
         jobExperience: experience,
         createdBy: userEmail,
-        createdAt: moment().format("DD-MM-YYYY"),
+        createdAt: moment().toDate(), 
+
       });
 
       return { status: 'success', message: 'Interview created successfully', data: create_resp };
